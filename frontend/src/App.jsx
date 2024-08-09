@@ -23,10 +23,7 @@ const App = () => {
   }, [])
 
   const handleInputChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    });
+    setFormData(f => ({...f, [event.target.name]: event.target.value }));
   }
   const handleFormSubmit = async (event) => {
     event.preventDefault();
