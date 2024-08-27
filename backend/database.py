@@ -19,6 +19,8 @@ collection = database.finance
 
 async def fectch_one(id: str):
     document = await collection.find_one({"_id": ObjectId(id)})
+    document["id"] = str(document["_id"])
+    del document["_id"]
     return document
 
 async def fectch_all():
@@ -35,9 +37,10 @@ async def create(finance: Finance):
     result = await collection.insert_one(finance)
     return finance
 
-async def update_finance(id:str, cnt: str):
-    await collection.update_one({"id":id},{"$set":{"content": cnt}})
-    document = await collection.find_one({"id": id})
+async def update_finance(id:str, cnt: Finance):
+    cnt = dict(cnt)
+    await collection.update_one({"_id": ObjectId(id)},{"$set":{**cnt}})
+    document = await collection.find_one({"_id": ObjectId(id)})
     return document
 
 async def delete_finance(id: str):

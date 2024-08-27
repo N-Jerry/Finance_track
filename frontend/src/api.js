@@ -7,6 +7,11 @@ export const getFinance = async () => {
   return response.data;
 };
 
+export const getFinanceById = async (id) => {
+  const response = await axios.get(`${API_URL}${id}/`);
+  return response.data;
+};
+
 export const createFinance = async (finance) => {
   const response = await axios.post(API_URL, finance);
   return response.data;

@@ -49,7 +49,7 @@ async def create_finance(finance: Finance):
     raise HTTPException(400, "Something went wrong/ BAD REQUEST")
 
 @app.put("/api/finance/{id}", response_model=Finance)
-async def update(id: str, cnt: str):
+async def update(id: str, cnt: Finance):
     response = await update_finance(id, cnt)
     if response:
         return response
